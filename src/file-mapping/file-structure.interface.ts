@@ -1,5 +1,10 @@
+export enum FileStructureTypes {
+  "file",
+  "folder",
+}
+
 export interface FileStructure {
-  type: "file" | "folder";
+  type: FileStructureTypes;
   name: string;
   children: FileStructure[];
 }

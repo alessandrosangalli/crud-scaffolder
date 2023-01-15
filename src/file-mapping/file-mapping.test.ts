@@ -1,5 +1,6 @@
 import { FileMapping } from "./file-mapping";
 import { FileMappingErrors } from "./file-mapping.errors";
+import { FileStructureTypes } from "./file-structure.interface";
 
 describe("File Manager", () => {
   test("Should create a folder", () => {
@@ -8,7 +9,7 @@ describe("File Manager", () => {
 
     const result = fileMapping.generate(destinationPath, [
       {
-        type: "folder",
+        type: FileStructureTypes.folder,
         name: "controllers",
         children: [],
       },
@@ -29,7 +30,7 @@ describe("File Manager", () => {
 
     const result = fileMapping.generate(destinationPath, [
       {
-        type: "file",
+        type: FileStructureTypes.file,
         name: "my-controller.ts",
         children: [],
       },
@@ -50,11 +51,11 @@ describe("File Manager", () => {
 
     const result = fileMapping.generate(destinationPath, [
       {
-        type: "folder",
+        type: FileStructureTypes.folder,
         name: "controllers",
         children: [
           {
-            type: "file",
+            type: FileStructureTypes.file,
             name: "my-controller.ts",
             children: [],
           },
@@ -81,16 +82,16 @@ describe("File Manager", () => {
 
     const result = fileMapping.generate(destinationPath, [
       {
-        type: "folder",
+        type: FileStructureTypes.folder,
         name: "controllers",
         children: [
           {
-            type: "folder",
+            type: FileStructureTypes.folder,
             name: "requests",
             children: [],
           },
           {
-            type: "file",
+            type: FileStructureTypes.file,
             name: "my-controller.ts",
             children: [],
           },
@@ -121,15 +122,15 @@ describe("File Manager", () => {
 
     const result = fileMapping.generate(destinationPath, [
       {
-        type: "folder",
+        type: FileStructureTypes.folder,
         name: "controllers",
         children: [
           {
-            type: "folder",
+            type: FileStructureTypes.folder,
             name: "requests",
             children: [
               {
-                type: "folder",
+                type: FileStructureTypes.folder,
                 name: "create-user-request",
                 children: [],
               },
@@ -162,30 +163,30 @@ describe("File Manager", () => {
 
     const result = fileMapping.generate(destinationPath, [
       {
-        type: "folder",
+        type: FileStructureTypes.folder,
         name: "controllers",
         children: [
           {
-            type: "folder",
+            type: FileStructureTypes.folder,
             name: "requests",
             children: [
               {
-                type: "folder",
+                type: FileStructureTypes.folder,
                 name: "create-user-request",
                 children: [
                   {
-                    type: "file",
+                    type: FileStructureTypes.file,
                     name: "create-user-request.ts",
                     children: [],
                   },
                 ],
               },
               {
-                type: "folder",
+                type: FileStructureTypes.folder,
                 name: "edit-user-request",
                 children: [
                   {
-                    type: "file",
+                    type: FileStructureTypes.file,
                     name: "edit-user-request.ts",
                     children: [],
                   },
@@ -236,11 +237,11 @@ describe("File Manager", () => {
 
     const result = fileMapping.generate(destinationPath, [
       {
-        type: "file",
+        type: FileStructureTypes.file,
         name: "my-controller.ts",
         children: [
           {
-            type: "file",
+            type: FileStructureTypes.file,
             name: "my-controller.ts",
             children: [],
           },

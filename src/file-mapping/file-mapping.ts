@@ -1,7 +1,7 @@
 import { Either, left, right } from "@/eiter";
 import { FileCreateInstruction } from "./file-create-instruction";
 import { FileMappingErrors } from "./file-mapping.errors";
-import { FileStructure } from "./file-structure.interface";
+import { FileStructure, FileStructureTypes } from "./file-structure.interface";
 
 export type FileMappingGenerateOutput = Either<
   FileMappingErrors.FileCantHaveChild,
@@ -28,14 +28,17 @@ export class FileMapping {
     instructions: FileCreateInstruction[]
   ): FileMappingGenerateOutput {
     for (const fileStructure of fileStructures) {
-      const currentPath = destinationPath + `/${fileStructure.name}`;
+      const currentPath = `${destinationPath}/${fileStructure.name}`;
       instructions.push({
-        type: fileStructure.type === "file" ? "create-file" : "create-folder",
+        type:
+          fileStructure.type === FileStructureTypes.file
+            ? "create-file"
+            : "create-folder",
         path: currentPath,
       });
 
       if (fileStructure.children.length > 0) {
-        if (fileStructure.type === "file")
+        if (fileStructure.type === FileStructureTypes.file)
           return left(new FileMappingErrors.FileCantHaveChild());
 
         this.fileStructureToInstructions(
